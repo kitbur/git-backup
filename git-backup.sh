@@ -14,7 +14,8 @@ for REPO in "${REPOS[@]}"; do
     # Check for changes
     if [ -n "$(git status --porcelain)" ]; then
       git add .
-      git commit -m "Auto backup: $(date) in $(basename "$REPO")"
+      COMMIT_BODY=$(git status --porcelain)
+      git commit -m "chore: Automated backup" -m "${COMMIT_BODY}"
       git push origin main
     fi
   fi
